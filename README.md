@@ -26,7 +26,7 @@ In [6]: print labels
 Out [6]: {'01': '01: 5', '10': '10: 5', '11': '11: 5'}
 ```
 
-And plot:
+Plot functions are based on the labels:
 ```python
 fig, ax = venn.venn2(labels, names=['list 1', 'list 2'])
 fig.show()
