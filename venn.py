@@ -454,12 +454,12 @@ def venn6(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     draw_text(fig, ax, 0.501, 0.523, labels.get('111111', ''), fontsize=fontsize)
         
     # legend
-    draw_text(fig, ax, 0.674, 0.824, names[0], colors[0]. fontsize=fontsize)
-    draw_text(fig, ax, 0.747, 0.751, names[1], colors[1]. fontsize=fontsize)
-    draw_text(fig, ax, 0.739, 0.396, names[2], colors[2]. fontsize=fontsize)
-    draw_text(fig, ax, 0.700, 0.247, names[3], colors[3]. fontsize=fontsize)
-    draw_text(fig, ax, 0.291, 0.255, names[4], colors[4]. fontsize=fontsize)
-    draw_text(fig, ax, 0.203, 0.484, names[5], colors[5]. fontsize=fontsize)
+    draw_text(fig, ax, 0.674, 0.824, names[0], colors[0], fontsize=fontsize)
+    draw_text(fig, ax, 0.747, 0.751, names[1], colors[1], fontsize=fontsize)
+    draw_text(fig, ax, 0.739, 0.396, names[2], colors[2], fontsize=fontsize)
+    draw_text(fig, ax, 0.700, 0.247, names[3], colors[3], fontsize=fontsize)
+    draw_text(fig, ax, 0.291, 0.255, names[4], colors[4], fontsize=fontsize)
+    draw_text(fig, ax, 0.203, 0.484, names[5], colors[5], fontsize=fontsize)
     leg = ax.legend(names, loc='best', fancybox=True)
     leg.get_frame().set_alpha(0.5)
     
