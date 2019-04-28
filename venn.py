@@ -40,15 +40,15 @@ def draw_triangle(fig, ax, x1, y1, x2, y2, x3, y3, fillcolor):
         closed=True,
         color=fillcolor)
     ax.add_patch(polygon)
-    
-def draw_text(fig, ax, x, y, text, color=[0, 0, 0, 1], fontsize=14):
+
+def draw_text(fig, ax, x, y, text, color=[0, 0, 0, 1], fontsize=14, ha="center", va="center"):
     ax.text(
         x, y, text,
-        horizontalalignment='center',
-        verticalalignment='center',
+        horizontalalignment=ha,
+        verticalalignment=va,
         fontsize=fontsize,
-        color=color)
-    
+        color="black") #      #color=color
+
 def draw_annotate(fig, ax, x, y, textx, texty, text, color=[0, 0, 0, 1], arrowcolor=[0, 0, 0, 0.3]):
     plt.annotate(
         text,
@@ -64,10 +64,10 @@ def draw_annotate(fig, ax, x, y, textx, texty, text, color=[0, 0, 0, 1], arrowco
     )
 
 def get_labels(data, fill=["number"]):
-    """    
+    """
     get a dict of labels for groups in data
-    
-    @type data: list[Iterable]    
+
+    @type data: list[Iterable]
     @rtype: dict[str, str]
 
     input
@@ -124,11 +124,11 @@ def get_labels(data, fill=["number"]):
 def venn2(labels, names=['A', 'B'], **options):
     """
     plots a 2-set Venn diagram
-        
+
     @type labels: dict[str, str]
     @type names: list[str]
     @rtype: (Figure, AxesSubplot)
-    
+
     input
       labels: a label dict where keys are identified via binary codes ('01', '10', '11'),
               hence a valid set could look like: {'01': 'text 1', '10': 'text 2', '11': 'text 3'}.
@@ -143,36 +143,36 @@ def venn2(labels, names=['A', 'B'], **options):
     figsize = options.get('figsize', (9, 7))
     dpi = options.get('dpi', 96)
     fontsize = options.get('fontsize', 14)
-    
+
     fig = plt.figure(0, figsize=figsize, dpi=dpi)
     ax = fig.add_subplot(111, aspect='equal')
     ax.set_axis_off()
     ax.set_ylim(bottom=0.0, top=0.7)
     ax.set_xlim(left=0.0, right=1.0)
-    
+
     # body
     draw_ellipse(fig, ax, 0.375, 0.3, 0.5, 0.5, 0.0, colors[0])
     draw_ellipse(fig, ax, 0.625, 0.3, 0.5, 0.5, 0.0, colors[1])
     draw_text(fig, ax, 0.74, 0.30, labels.get('01', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.26, 0.30, labels.get('10', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.50, 0.30, labels.get('11', ''), fontsize=fontsize)
-    
+
     # legend
-    draw_text(fig, ax, 0.20, 0.56, names[0], colors[0], fontsize=fontsize)
-    draw_text(fig, ax, 0.80, 0.56, names[1], colors[1], fontsize=fontsize)
-    leg = ax.legend(names, loc='best', fancybox=True)
+    draw_text(fig, ax, 0.20, 0.56, names[0], colors[0], fontsize=fontsize, ha="right", va="bottom")
+    draw_text(fig, ax, 0.80, 0.56, names[1], colors[1], fontsize=fontsize, ha="left", va="bottom")
+    leg = ax.legend(names, loc='center left', bbox_to_anchor=(1.0, 0.5), fancybox=True) # plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5), ncol=ncol)
     leg.get_frame().set_alpha(0.5)
-    
+
     return fig, ax
 
 def venn3(labels, names=['A', 'B', 'C'], **options):
     """
     plots a 3-set Venn diagram
-        
+
     @type labels: dict[str, str]
     @type names: list[str]
     @rtype: (Figure, AxesSubplot)
-    
+
     input
       labels: a label dict where keys are identified via binary codes ('001', '010', '100', ...),
               hence a valid set could look like: {'001': 'text 1', '010': 'text 2', '100': 'text 3', ...}.
@@ -187,13 +187,13 @@ def venn3(labels, names=['A', 'B', 'C'], **options):
     figsize = options.get('figsize', (9, 9))
     dpi = options.get('dpi', 96)
     fontsize = options.get('fontsize', 14)
-    
+
     fig = plt.figure(0, figsize=figsize, dpi=dpi)
     ax = fig.add_subplot(111, aspect='equal')
     ax.set_axis_off()
     ax.set_ylim(bottom=0.0, top=1.0)
     ax.set_xlim(left=0.0, right=1.0)
-    
+
     # body
     draw_ellipse(fig, ax, 0.333, 0.633, 0.5, 0.5, 0.0, colors[0])
     draw_ellipse(fig, ax, 0.666, 0.633, 0.5, 0.5, 0.0, colors[1])
@@ -205,24 +205,24 @@ def venn3(labels, names=['A', 'B', 'C'], **options):
     draw_text(fig, ax, 0.39, 0.46, labels.get('101', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.50, 0.65, labels.get('110', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.50, 0.51, labels.get('111', ''), fontsize=fontsize)
-    
+
     # legend
-    draw_text(fig, ax, 0.15, 0.87, names[0], colors[0], fontsize=fontsize)
-    draw_text(fig, ax, 0.85, 0.87, names[1], colors[1], fontsize=fontsize)
-    draw_text(fig, ax, 0.50, 0.02, names[2], colors[2], fontsize=fontsize)
-    leg = ax.legend(names, loc='best', fancybox=True)
+    draw_text(fig, ax, 0.15, 0.87, names[0], colors[0], fontsize=fontsize, ha="right", va="bottom")
+    draw_text(fig, ax, 0.85, 0.87, names[1], colors[1], fontsize=fontsize, ha="left", va="bottom")
+    draw_text(fig, ax, 0.50, 0.02, names[2], colors[2], fontsize=fontsize, va="top")
+    leg = ax.legend(names, loc='center left', bbox_to_anchor=(1.0, 0.5), fancybox=True)
     leg.get_frame().set_alpha(0.5)
-    
+
     return fig, ax
 
 def venn4(labels, names=['A', 'B', 'C', 'D'], **options):
     """
     plots a 4-set Venn diagram
-        
+
     @type labels: dict[str, str]
     @type names: list[str]
     @rtype: (Figure, AxesSubplot)
-    
+
     input
       labels: a label dict where keys are identified via binary codes ('0001', '0010', '0100', ...),
               hence a valid set could look like: {'0001': 'text 1', '0010': 'text 2', '0100': 'text 3', ...}.
@@ -237,14 +237,14 @@ def venn4(labels, names=['A', 'B', 'C', 'D'], **options):
     figsize = options.get('figsize', (12, 12))
     dpi = options.get('dpi', 96)
     fontsize = options.get('fontsize', 14)
-    
+
     fig = plt.figure(0, figsize=figsize, dpi=dpi)
     ax = fig.add_subplot(111, aspect='equal')
     ax.set_axis_off()
     ax.set_ylim(bottom=0.0, top=1.0)
     ax.set_xlim(left=0.0, right=1.0)
-    
-    # body   
+
+    # body
     draw_ellipse(fig, ax, 0.350, 0.400, 0.72, 0.45, 140.0, colors[0])
     draw_ellipse(fig, ax, 0.450, 0.500, 0.72, 0.45, 140.0, colors[1])
     draw_ellipse(fig, ax, 0.544, 0.500, 0.72, 0.45, 40.0, colors[2])
@@ -264,25 +264,25 @@ def venn4(labels, names=['A', 'B', 'C', 'D'], **options):
     draw_text(fig, ax, 0.61, 0.24, labels.get('1101', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.35, 0.50, labels.get('1110', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.50, 0.38, labels.get('1111', ''), fontsize=fontsize)
-    
+
     # legend
-    draw_text(fig, ax, 0.13, 0.18, names[0], colors[0], fontsize=fontsize)
-    draw_text(fig, ax, 0.18, 0.83, names[1], colors[1], fontsize=fontsize)
-    draw_text(fig, ax, 0.82, 0.83, names[2], colors[2], fontsize=fontsize)
-    draw_text(fig, ax, 0.87, 0.18, names[3], colors[3], fontsize=fontsize)
-    leg = ax.legend(names, loc='best', fancybox=True)
+    draw_text(fig, ax, 0.13, 0.18, names[0], colors[0], fontsize=fontsize, ha="right")
+    draw_text(fig, ax, 0.18, 0.83, names[1], colors[1], fontsize=fontsize, ha="right", va="bottom")
+    draw_text(fig, ax, 0.82, 0.83, names[2], colors[2], fontsize=fontsize, ha="left", va="bottom")
+    draw_text(fig, ax, 0.87, 0.18, names[3], colors[3], fontsize=fontsize, ha="left", va="top")
+    leg = ax.legend(names, loc='center left', bbox_to_anchor=(1.0, 0.5), fancybox=True)
     leg.get_frame().set_alpha(0.5)
-    
+
     return fig, ax
 
 def venn5(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     """
     plots a 5-set Venn diagram
-        
+
     @type labels: dict[str, str]
     @type names: list[str]
     @rtype: (Figure, AxesSubplot)
-    
+
     input
       labels: a label dict where keys are identified via binary codes ('00001', '00010', '00100', ...),
               hence a valid set could look like: {'00001': 'text 1', '00010': 'text 2', '00100': 'text 3', ...}.
@@ -297,14 +297,14 @@ def venn5(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     figsize = options.get('figsize', (13, 13))
     dpi = options.get('dpi', 96)
     fontsize = options.get('fontsize', 14)
-    
+
     fig = plt.figure(0, figsize=figsize, dpi=dpi)
     ax = fig.add_subplot(111, aspect='equal')
     ax.set_axis_off()
     ax.set_ylim(bottom=0.0, top=1.0)
     ax.set_xlim(left=0.0, right=1.0)
-    
-    # body   
+
+    # body
     draw_ellipse(fig, ax, 0.428, 0.449, 0.87, 0.50, 155.0, colors[0])
     draw_ellipse(fig, ax, 0.469, 0.543, 0.87, 0.50, 82.0, colors[1])
     draw_ellipse(fig, ax, 0.558, 0.523, 0.87, 0.50, 10.0, colors[2])
@@ -341,26 +341,26 @@ def venn5(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     draw_text(fig, ax, 0.28, 0.39, labels.get('11101', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.36, 0.66, labels.get('11110', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.51, 0.47, labels.get('11111', ''), fontsize=fontsize)
-    
+
     # legend
-    draw_text(fig, ax, 0.02, 0.72, names[0], colors[0], fontsize=fontsize)
-    draw_text(fig, ax, 0.72, 0.94, names[1], colors[1], fontsize=fontsize)
-    draw_text(fig, ax, 0.97, 0.74, names[2], colors[2], fontsize=fontsize)
-    draw_text(fig, ax, 0.88, 0.05, names[3], colors[3], fontsize=fontsize)
-    draw_text(fig, ax, 0.12, 0.05, names[4], colors[4], fontsize=fontsize)
-    leg = ax.legend(names, loc='best', fancybox=True)
+    draw_text(fig, ax, 0.02, 0.72, names[0], colors[0], fontsize=fontsize, ha="right")
+    draw_text(fig, ax, 0.72, 0.94, names[1], colors[1], fontsize=fontsize, va="bottom")
+    draw_text(fig, ax, 0.97, 0.74, names[2], colors[2], fontsize=fontsize, ha="left")
+    draw_text(fig, ax, 0.88, 0.05, names[3], colors[3], fontsize=fontsize, ha="left")
+    draw_text(fig, ax, 0.12, 0.05, names[4], colors[4], fontsize=fontsize, ha="right")
+    leg = ax.legend(names, loc='center left', bbox_to_anchor=(1.0, 0.5), fancybox=True)
     leg.get_frame().set_alpha(0.5)
-    
+
     return fig, ax
 
 def venn6(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     """
     plots a 6-set Venn diagram
-        
+
     @type labels: dict[str, str]
     @type names: list[str]
     @rtype: (Figure, AxesSubplot)
-    
+
     input
       labels: a label dict where keys are identified via binary codes ('000001', '000010', '000100', ...),
               hence a valid set could look like: {'000001': 'text 1', '000010': 'text 2', '000100': 'text 3', ...}.
@@ -375,14 +375,14 @@ def venn6(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     figsize = options.get('figsize', (20, 20))
     dpi = options.get('dpi', 96)
     fontsize = options.get('fontsize', 14)
-    
+
     fig = plt.figure(0, figsize=figsize, dpi=dpi)
     ax = fig.add_subplot(111, aspect='equal')
     ax.set_axis_off()
     ax.set_ylim(bottom=0.230, top=0.845)
     ax.set_xlim(left=0.173, right=0.788)
-    
-    # body   
+
+    # body
     draw_triangle(fig, ax, 0.637, 0.921, 0.649, 0.274, 0.188, 0.667, colors[0])
     draw_triangle(fig, ax, 0.981, 0.769, 0.335, 0.191, 0.393, 0.671, colors[1])
     draw_triangle(fig, ax, 0.941, 0.397, 0.292, 0.475, 0.456, 0.747, colors[2])
@@ -452,7 +452,7 @@ def venn6(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     draw_text(fig, ax, 0.591, 0.604, labels.get('111101', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.622, 0.477, labels.get('111110', ''), fontsize=fontsize)
     draw_text(fig, ax, 0.501, 0.523, labels.get('111111', ''), fontsize=fontsize)
-        
+
     # legend
     draw_text(fig, ax, 0.674, 0.824, names[0], colors[0], fontsize=fontsize)
     draw_text(fig, ax, 0.747, 0.751, names[1], colors[1], fontsize=fontsize)
@@ -460,8 +460,8 @@ def venn6(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
     draw_text(fig, ax, 0.700, 0.247, names[3], colors[3], fontsize=fontsize)
     draw_text(fig, ax, 0.291, 0.255, names[4], colors[4], fontsize=fontsize)
     draw_text(fig, ax, 0.203, 0.484, names[5], colors[5], fontsize=fontsize)
-    leg = ax.legend(names, loc='best', fancybox=True)
+    leg = ax.legend(names, loc='center left', bbox_to_anchor=(1.0, 0.5), fancybox=True)
     leg.get_frame().set_alpha(0.5)
-    
+
     return fig, ax
 
