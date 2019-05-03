@@ -47,7 +47,7 @@ def draw_text(fig, ax, x, y, text, color=[0, 0, 0, 1], fontsize=14, ha="center",
         horizontalalignment=ha,
         verticalalignment=va,
         fontsize=fontsize,
-        color="black") #      #color=color
+        color="black")
 
 def draw_annotate(fig, ax, x, y, textx, texty, text, color=[0, 0, 0, 1], arrowcolor=[0, 0, 0, 0.3]):
     plt.annotate(
@@ -92,7 +92,7 @@ def get_labels(data, fill=["number"]):
     N = len(data)
 
     sets_data = [set(data[i]) for i in range(N)]  # sets for separate groups
-    s_all = set(chain(*data))                             # union of all sets
+    s_all = set(chain(*data))                     # union of all sets
 
     # bin(3) --> '0b11', so bin(3).split('0b')[-1] will remove "0b"
     set_collections = {}
@@ -160,7 +160,7 @@ def venn2(labels, names=['A', 'B'], **options):
     # legend
     draw_text(fig, ax, 0.20, 0.56, names[0], colors[0], fontsize=fontsize, ha="right", va="bottom")
     draw_text(fig, ax, 0.80, 0.56, names[1], colors[1], fontsize=fontsize, ha="left", va="bottom")
-    leg = ax.legend(names, loc='center left', bbox_to_anchor=(1.0, 0.5), fancybox=True) # plt.legend(loc='center left', bbox_to_anchor=(1.0, 0.5), ncol=ncol)
+    leg = ax.legend(names, loc='center left', bbox_to_anchor=(1.0, 0.5), fancybox=True)
     leg.get_frame().set_alpha(0.5)
 
     return fig, ax
