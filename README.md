@@ -1,14 +1,20 @@
 # pyvenn
 2 ~ 6 Sets Venn Diagram For Python
 
-Use magic function in ipython notebook:
+Checkout this repository first:
+```python
+git clone https://github.com/tctianchi/pyvenn.git
+cd pyvenn
+```
+
+Use magic function in an ipython notebook:
 ```python
 %matplotlib inline
 
 import venn
 ```
 
-Or using non-interactive backend:
+Or use a non-interactive backend:
 ```python
 import matplotlib
 matplotlib.use('Agg')
@@ -16,7 +22,7 @@ matplotlib.use('Agg')
 import venn
 ```
 
-Fetch labels of each subset in venn diagram. The input data is an array of iterable data(list, set, etc.). 
+Fetch labels for each subset of the venn diagram. The input argument is an array of iterable data(list, set, etc.). You will get a mapping table, where "10" indicates the number of elements in set 1 but not in set 2, "01" indicates the number of elements in set 2 but not in set 1, and so on.
 ```python
 In [5]: labels = venn.get_labels([
             range(10),
