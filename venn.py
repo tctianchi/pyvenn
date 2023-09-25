@@ -357,7 +357,7 @@ def venn5(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
 
     return fig, ax
 
-def venn6(labels, names=['A', 'B', 'C', 'D', 'E'], **options):
+def venn6(labels, names=['A', 'B', 'C', 'D', 'E', 'F'], **options):
     """
     plots a 6-set Venn diagram
 
