@@ -76,7 +76,7 @@ def get_labels(data, fill=["number"]):
 
     input
       data: data to get label for
-      fill: ["number"|"logic"|"percent"]
+      fill: ["number"|"logic"|"percent"|"data"]
 
     return
       labels: a dict of labels for different sets
@@ -122,6 +122,9 @@ def get_labels(data, fill=["number"]):
         data_size = len(s_all)
         for k in set_collections:
             labels[k] += "(%.1f%%)" % (100.0 * len(set_collections[k]) / data_size)
+    if "data" in fill:
+      for k in set_collections:
+        labels[k] += "\n".join(set_collections[k])
 
     return labels
 
